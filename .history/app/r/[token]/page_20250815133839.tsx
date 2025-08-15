@@ -46,7 +46,7 @@ function RegisterPageClient({ token }: { token: string }) {
     "desktop"
   );
   const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-  const isAndroid = /Android/i.test(ua);
+  const isAndroid = true; ///Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   console.log("hung isAndroid:", isAndroid);
   console.log("hung isIOS:", isIOS);

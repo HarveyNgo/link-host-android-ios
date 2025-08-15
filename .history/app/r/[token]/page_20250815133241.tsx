@@ -46,7 +46,7 @@ function RegisterPageClient({ token }: { token: string }) {
     "desktop"
   );
   const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-  const isAndroid = /Android/i.test(ua);
+  const isAndroid = true; ///Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   console.log("hung isAndroid:", isAndroid);
   console.log("hung isIOS:", isIOS);
@@ -87,7 +87,7 @@ function RegisterPageClient({ token }: { token: string }) {
       //     "https://play.google.com/store/apps/details?id=com.facebook.katana"
       //   );
       // Try to open the app via deep link
-      //   window.location.replace(`b3well://r/${encodeURIComponent(token)}`);
+    //   window.location.replace(`b3well://r/${encodeURIComponent(token)}`);
 
       // // If the app is not installed, after a short delay, redirect to Google Play Store
       setTimeout(() => {

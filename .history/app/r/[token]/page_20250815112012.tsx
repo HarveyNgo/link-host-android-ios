@@ -46,7 +46,7 @@ function RegisterPageClient({ token }: { token: string }) {
     "desktop"
   );
   const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-  const isAndroid = /Android/i.test(ua);
+  const isAndroid = true; ///Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   console.log("hung isAndroid:", isAndroid);
   console.log("hung isIOS:", isIOS);
@@ -83,18 +83,16 @@ function RegisterPageClient({ token }: { token: string }) {
       //   window.location.href = intentUrl;
       //   alert("hung intentUrl: " + intentUrl);
       //   window.location.replace(intentUrl);
-      //   window.location.replace(
-      //     "https://play.google.com/store/apps/details?id=com.facebook.katana"
-      //   );
+      window.location.replace(ANDROID_PLAY_URL);
       // Try to open the app via deep link
       //   window.location.replace(`b3well://r/${encodeURIComponent(token)}`);
 
       // // If the app is not installed, after a short delay, redirect to Google Play Store
-      setTimeout(() => {
-        window.location.replace(
-          "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev"
-        );
-      }, 1200);
+      // setTimeout(() => {
+      //   window.location.replace(
+      //     "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev"
+      //   );
+      // }, 1200);
     } else if (isIOS) {
       setPlatform("ios");
       const schemeUrl = `${SCHEME}://r/${encodeURIComponent(token)}`;

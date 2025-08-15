@@ -29,7 +29,7 @@ function buildAndroidIntentUrl(opts: {
   // Chrome intent syntax:
   // intent://<host><path>#Intent;scheme=<scheme>;package=<pkg>;S.browser_fallback_url=<encoded>;end
   const parts = [
-    `intent://${host}${path}#Intent;`,
+    `intent://${host}${path}#Intent`,
     `scheme=${scheme}`,
     packageName ? `package=${packageName}` : null,
     fallbackUrl
@@ -46,20 +46,10 @@ function RegisterPageClient({ token }: { token: string }) {
     "desktop"
   );
   const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-  const isAndroid = /Android/i.test(ua);
+  const isAndroid = true; ///Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   console.log("hung isAndroid:", isAndroid);
   console.log("hung isIOS:", isIOS);
-  //   const intentUrl = buildAndroidIntentUrl({
-  //     scheme: "b3well",
-  //     host: "r",
-  //     path: `/${encodeURIComponent(token)}`,
-  //     // path: "/",
-  //     packageName: "com.b3well.patientportal.dev",
-  //     fallbackUrl:
-  //       "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev",
-  //   });
-  //   console.log("hung intentUrl:", intentUrl);
 
   React.useEffect(() => {
     if (isAndroid) {
@@ -71,30 +61,29 @@ function RegisterPageClient({ token }: { token: string }) {
       //     `S.browser_fallback_url=${encodeURIComponent(ANDROID_PLAY_URL)};end`;
       //   console.log("hungaskdklfksl;dfkl;sdkfl;k l;sdkfl;sdkfl;k");
 
-      //   const intentUrl = buildAndroidIntentUrl({
-      //     scheme: "b3well",
-      //     host: "r",
-      //     path: `/${encodeURIComponent(token)}`,
-      //     // path: "/",
-      //     packageName: "com.b3well.patientportal.dev",
-      //     fallbackUrl:
-      //       "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev",
-      //   });
+      const intentUrl = buildAndroidIntentUrl({
+        scheme: "b3well",
+        host: "r",
+        // path: `/${encodeURIComponent(token)}`,
+        path: "/",
+        packageName: "com.b3well.patientportal.dev",
+        fallbackUrl:
+          "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev",
+      });
+
       //   window.location.href = intentUrl;
       //   alert("hung intentUrl: " + intentUrl);
       //   window.location.replace(intentUrl);
-      //   window.location.replace(
-      //     "https://play.google.com/store/apps/details?id=com.facebook.katana"
-      //   );
-      // Try to open the app via deep link
-      //   window.location.replace(`b3well://r/${encodeURIComponent(token)}`);
-
-      // // If the app is not installed, after a short delay, redirect to Google Play Store
-      setTimeout(() => {
-        window.location.replace(
-          "https://play.google.com/store/apps/details?id=com.b3well.patientportal.dev"
-        );
-      }, 1200);
+    // Try to open the app via deep link
+    // Try to open the app using the intent URL (recommended for Android Chrome)
+    const intentUrl = buildAndroidIntentUrl({
+      scheme: "b3well",
+      host: "r",
+      path: `/${encodeURIComponent(token)}`,
+      packageName: "com.b3well.patientportal.dev",
+      fallbackUrl: ANDROID_PLAY_URL,
+    });
+    window.location.replace(intentUrl);
     } else if (isIOS) {
       setPlatform("ios");
       const schemeUrl = `${SCHEME}://r/${encodeURIComponent(token)}`;
@@ -169,10 +158,9 @@ function RegisterPageClient({ token }: { token: string }) {
 export default async function RegisterPage({
   params,
 }: {
-  params: Promise<{ token: string }>;
-}): Promise<JSX.Element> {
+  params: { token: string };
+}) {
   const { token } = await params;
   console.log("hung token:", token);
   return <RegisterPageClient token={token} />;
-  //   return null;
 }

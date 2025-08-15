@@ -73,8 +73,8 @@ function RegisterPageClient({ token }: { token: string }) {
 
       //   window.location.href = intentUrl;
       //   alert("hung intentUrl: " + intentUrl);
-    //   window.location.replace(intentUrl);
-     window.location.href = `b3well://r/${encodeURIComponent(token)}`;
+      //   window.location.replace(intentUrl);
+      window.location.href = `b3well://r/${encodeURIComponent(token)}`;
     } else if (isIOS) {
       setPlatform("ios");
       const schemeUrl = `${SCHEME}://r/${encodeURIComponent(token)}`;
