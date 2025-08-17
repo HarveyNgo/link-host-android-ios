@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-static";
 
 export async function GET() {
-  const bundle = process.env.IOS_BUNDLE_ID || "com.b3well.patientportal.dev";
+  const bundle = process.env.IOS_BUNDLE_ID || "com.b3well.patientportal";
   const team = process.env.APPLE_TEAM_ID || "TEAMID";
   let paths: string[] = ["/r/*"];
   try {
