@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.b3well.patientportal",
+      "sha256_cert_fingerprints": [
+        "AA:BB:...:11",  // debug keystore (emulator/dev build)
+        "22:33:...:FF"   // release/Play App Signing certificate
+      ]
+    }
+  }
+]
